@@ -215,6 +215,7 @@
 | B3 | 1,2 | Tyrunt (M) | Adamant | Strong Jaw | 07.31.31.31.31.31 | 4089 |
                         </pre>
                         - Click <button class="btn btn-sm btn-success">Submit</button>, your boxes are ready to view. <br>
+                        - If you think you get stuck or some thing. Click  <button class="btn btn-danger btn-sm" id="">Clear Data</button> then start over.
                         - I will try to add more format supporting as soon as I have time.
                     </p>
                 </div>
