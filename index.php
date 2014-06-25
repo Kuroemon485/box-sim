@@ -160,7 +160,7 @@
                     <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
 				</div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-success" id="impd">Import</button>
+                    <button class="btn btn-sm btn-success" id="impd">Submit</button>
                     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i>
                     Close</button>
                 </div>
@@ -177,8 +177,35 @@
                 <div class="modal-body" id="">
                     <p>
                         - Get you boxes data from MassDumper, using Reddit's format. <br>
-                        - Click Import and a modal will appear, paste the data into the textarea. <br>
-                        - Click Import, your boxes are ready to view. <br>
+                        - Click <button class="btn btn-success btn-sm">Import</button> and a modal will appear, paste the data into the textarea. <br>
+                        - Your data should be something like this:
+                        <pre>
+| Box | Slot | Name | Nature | Ability | Spread | SV
+|:--|:--|:--|:--|:--|:--|:--
+| B2 | 1,1 | Tyrunt (M) | Adamant | Strong Jaw | 31.31.31.04.31.31 | 1164 |
+| B2 | 1,2 | Tyrunt (F) | Adamant | Strong Jaw | 31.31.31.31.29.31 | 0246 |
+| B2 | 1,3 | Tyrunt (M) | Adamant | Strong Jaw | 31.29.31.31.31.31 | 2815 |
+| B2 | 1,4 | Heracross (M) | Adamant | Swarm | 31.31.31.31.31.31 | 2864 |
+| B2 | 1,6 | Kangaskhan (F) | Jolly | Scrappy | 31.31.31.09.31.31 | 1468 |
+| B2 | 2,1 | Eevee (M) | Calm | Adaptability | 31.13.29.31.31.31 | 3914 |
+| B2 | 2,2 | Kangaskhan (F) | Jolly | Scrappy | 31.31.31.31.31.31 | 0898 |
+| B2 | 2,4 | Honedge (M) | Quiet | No Guard | 31.31.31.31.31.28 | 0202 |
+| B2 | 2,6 | Honedge (M) | Quiet | No Guard | 31.31.31.31.31.28 | 3377 |
+| B2 | 3,4 | Kangaskhan (F) | Jolly | Scrappy | 31.31.31.15.31.31 | 3196 |
+| B2 | 4,2 | Heracross (M) | Adamant | Moxie | 31.31.31.00.31.31 | 4040 |
+| B2 | 4,3 | Heracross (M) | Adamant | Moxie | 31.31.31.22.31.31 | 0717 |
+| B2 | 4,5 | Heracross (M) | Adamant | Moxie | 31.31.31.00.31.31 | 0823 |
+| B3 | 1,1 | Tyrunt (M) | Adamant | Strong Jaw | 30.31.09.31.31.31 | 2819 |
+| B3 | 1,2 | Tyrunt (M) | Adamant | Strong Jaw | 07.31.31.31.31.31 | 4089 |
+.
+.
+.
+| B27 | 5,2 | Heracross (M) | Adamant | Moxie | 31.31.31.22.31.04 | 1891 |
+| B27 | 5,3 | Heracross (M) | Adamant | Moxie | 31.31.01.22.31.31 | 3172 |
+| B27 | 5,4 | Heracross (M) | Adamant | Moxie | 31.31.31.22.06.31 | 0503 |
+| B27 | 5,5 | Heracross (F) | Adamant | Swarm | 31.31.04.22.31.31 | 3160 |
+                        </pre>
+                        - Click <button class="btn btn-sm btn-success">Submit</button>, your boxes are ready to view. <br>
                     </p>
                 </div>
                 <div class="modal-footer">
