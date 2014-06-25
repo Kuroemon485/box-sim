@@ -120,6 +120,7 @@
                                                 </div>
                                             </div>
                                             <button class="btn btn-success btn-sm" id="cim">Import</button>
+                                            <button class="btn btn-danger btn-sm" id="cld">Clear Data</button>
                                         </div>
                                     </div>
                                     <div class="box-body">
