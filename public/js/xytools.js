@@ -4,7 +4,6 @@
 (function($, window, document) {
 	
 	$(function() {
-		// console.log(localStorage.getItem("boxesdata"))
 		if (localStorage.getItem("boxesdata") != null) {
 			process_box_data(localStorage.getItem("boxesdata"));
 		};
@@ -13,6 +12,9 @@
 		});
 		$('#cld').on('click', function () {
 			cleardata();
+		});
+		$('#cfm').on('click', function () {
+			$('#faqs-modal').modal('show');
 		});
 		$('.show-info').popover({
             animation: true,
