@@ -26,7 +26,7 @@
 			image = '<img src="public/images/minisprites/'+data_species+'.png" alt="">';
 			data = "Nature: "+nature+"<br />"+"Ability: "+ability+"<br />"+"IVs Spread: "+spread;
 			if (properties[6]) {
-				data+="<br />"+"EVS: "+esv;
+				data+="<br />"+"ESV: "+esv;
 				species = '<b class="text-red">[EGG]</b> '+species;
 			};
 			$('#'+box+' #'+position[0]+'-'+position[1]+" button").attr('data-content', data).attr('data-original-title', species).empty().append(image);
