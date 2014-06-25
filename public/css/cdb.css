@@ -1,0 +1,253 @@
+.va-middle {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+.table tr > th,
+.table tr > td,
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tbody > tr > td {
+  vertical-align: middle;
+}
+.dropdown-menu.drop-right {
+  left: auto !important;
+  right: 0 !important;
+}
+.dropdown-menu.drop-right .menu-container li {
+  list-style: none;
+}
+.dropdown-menu.drop-right .menu-container li:hover {
+  color: red;
+}
+.dropdown-menu.pkm-list {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.clear {
+  clear: both;
+}
+.vcenter {
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+}
+select.form-control {
+  padding-left: 9px;
+}
+.type-icon-flat {
+  display: inline-block;
+  width: 65px;
+  line-height: 1;
+  padding: 2px 0px;
+  border: 2px solid #AAA;
+  -moz-box-shadow: inset 0 0 1px 1px #FFF;
+  -webkit-box-shadow: inset 0 0 1px 1px #FFF;
+  box-shadow: inset 0 0 1px 1px #FFF;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  color: #FFF;
+  font-size: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.type-icon-flat:hover {
+  opacity: 0.85;
+  color: #FFF;
+}
+.type-icon-flat.type-normal {
+  background: #8A8A59;
+  border-color: #79794E;
+}
+.type-icon-flat.type-fire {
+  background: #DD6610;
+  border-color: #B4530D;
+}
+.type-icon-flat.type-water {
+  background: #386CEB;
+  border-color: #1753E3;
+}
+.type-icon-flat.type-electric {
+  background: #F0C108;
+  border-color: #C19B07;
+}
+.type-icon-flat.type-grass {
+  background: #5ca935;
+  border-color: #4a892b;
+}
+.type-icon-flat.type-ice {
+  background: #69c6c6;
+  border-color: #45b6b6;
+}
+.type-icon-flat.type-fighting {
+  background: #9d2721;
+  border-color: #82211b;
+}
+.type-icon-flat.type-poison {
+  background: #803380;
+  border-color: #662966;
+}
+.type-icon-flat.type-poison {
+  background: #803380;
+  border-color: #662966;
+}
+.type-icon-flat.type-ground {
+  background: #d4a82f;
+  border-color: #aa8623;
+}
+.type-icon-flat.type-flying {
+  background: #9180c4;
+  border-color: #7762b6;
+}
+.type-icon-flat.type-psychic {
+  background: #f61c5d;
+  border-color: #d60945;
+}
+.type-icon-flat.type-bug {
+  background: #8d9a1b;
+  border-color: #616b13;
+}
+.type-icon-flat.type-rock {
+  background: #93802d;
+  border-color: #746523;
+}
+.type-icon-flat.type-ghost {
+  background: #554374;
+  border-color: #413359;
+}
+.type-icon-flat.type-dragon {
+  background: #4c08ef;
+  border-color: #3d07c0;
+}
+.type-icon-flat.type-dark {
+  background: #513f34;
+  border-color: #362a23;
+}
+.type-icon-flat.type-steel {
+  background: #9797ba;
+  border-color: #7a7aa7;
+}
+.type-icon-flat.type-fairy {
+  background: #de6ede;
+  border-color: #d547d5;
+}
+.type-icon {
+  display: inline-block;
+  width: 54px;
+  line-height: 1;
+  padding: 3px 0px;
+  margin-bottom: 1px;
+  border: 1px solid #AAA;
+  border-radius: 2px;
+  color: #FFF;
+  font-size: 10px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #333;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.type-icon:hover {
+  opacity: 0.85;
+  color: #FFF;
+}
+.type-icon.type-normal {
+  background: linear-gradient(#a8a878, #8a8a59) repeat scroll 0% 0% #8a8a59;
+  border-color: #79794E;
+}
+.type-icon.type-fire {
+  background: linear-gradient(#f08030, #dd6610) repeat scroll 0% 0% #f08030;
+  border-color: #B4530D;
+}
+.type-icon.type-water {
+  background: linear-gradient(#6890f0, #386ceb) repeat scroll 0% 0% #6890f0;
+  border-color: #1753E3;
+}
+.type-icon.type-electric {
+  background: linear-gradient(#f8d030, #f0c108) repeat scroll 0% 0% #f8d030;
+  border-color: #C19B07;
+}
+.type-icon.type-grass {
+  background: linear-gradient(#78c850, #5ca935) repeat scroll 0 0 #78c850;
+  border-color: #4a892b;
+}
+.type-icon.type-ice {
+  background: linear-gradient(#98d8d8, #69c6c6) repeat scroll 0 0 #98d8d8;
+  border-color: #45b6b6;
+}
+.type-icon.type-fighting {
+  background: linear-gradient(#c03028, #9d2721) repeat scroll 0 0 #c03028;
+  border-color: #82211b;
+}
+.type-icon.type-poison {
+  background: linear-gradient(#a040a0, #803380) repeat scroll 0 0 #a040a0;
+  border-color: #662966;
+}
+.type-icon.type-poison {
+  background: linear-gradient(#a040a0, #803380) repeat scroll 0 0 #a040a0;
+  border-color: #662966;
+}
+.type-icon.type-ground {
+  background: linear-gradient(#e0c068, #d4a82f) repeat scroll 0 0 #e0c068;
+  border-color: #aa8623;
+}
+.type-icon.type-flying {
+  background: linear-gradient(#a890f0, #9180c4) repeat scroll 0 0 #a890f0;
+  border-color: #7762b6;
+}
+.type-icon.type-psychic {
+  background: linear-gradient(#f85888, #f61c5d) repeat scroll 0 0 #f85888;
+  border-color: #d60945;
+}
+.type-icon.type-bug {
+  background: linear-gradient(#a8b820, #8d9a1b) repeat scroll 0 0 #a8b820;
+  border-color: #616b13;
+}
+.type-icon.type-rock {
+  background: linear-gradient(#b8a038, #93802d) repeat scroll 0 0 #b8a038;
+  border-color: #746523;
+}
+.type-icon.type-ghost {
+  background: linear-gradient(#705898, #554374) repeat scroll 0 0 #705898;
+  border-color: #413359;
+}
+.type-icon.type-dragon {
+  background: linear-gradient(#7038f8, #4c08ef) repeat scroll 0 0 #7038f8;
+  border-color: #3d07c0;
+}
+.type-icon.type-dark {
+  background: linear-gradient(#705848, #513f34) repeat scroll 0 0 #705848;
+  border-color: #362a23;
+}
+.type-icon.type-steel {
+  background: linear-gradient(#b8b8d0, #9797ba) repeat scroll 0 0 #b8b8d0;
+  border-color: #7a7aa7;
+}
+.type-icon.type-fairy {
+  background: linear-gradient(#e898e8, #de6ede) repeat scroll 0 0 #e898e8;
+  border-color: #d547d5;
+}
+.category-icon {
+  display: inline-block;
+  height: 18px;
+  line-height: 1;
+  vertical-align: middle;
+  width: 41px;
+  color: transparent;
+  cursor: pointer;
+}
+.category-icon:hover {
+  opacity: 0.85;
+  color: transparent;
+}
+.category-icon.special {
+  background-image: url(../images/category/special.png);
+}
+.category-icon.physical {
+  background-image: url(../images/category/physical.png);
+}
+.category-icon.status {
+  background-image: url(../images/category/status.png);
+}
