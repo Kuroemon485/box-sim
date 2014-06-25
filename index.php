@@ -176,7 +176,7 @@
                 </div>
                 <div class="modal-body" id="">
                     <p>
-                        - Get you boxes data from MassDumper, using Reddit's format. <br>
+                        - Get you boxes data from <b class="text-red">MassDumper</b>, using <b class="text-red">Reddit's format</b>. <br>
                         - Click <button class="btn btn-success btn-sm">Import</button> and a modal will appear, paste the data into the textarea. <br>
                         - Your data should be something like this:
                         <pre>
@@ -206,6 +206,7 @@
 | B27 | 5,5 | Heracross (F) | Adamant | Swarm | 31.31.04.22.31.31 | 3160 |
                         </pre>
                         - Click <button class="btn btn-sm btn-success">Submit</button>, your boxes are ready to view. <br>
+                        - I will try to add more format supporting as soon as I have time.
                     </p>
                 </div>
                 <div class="modal-footer">
