@@ -39,20 +39,20 @@
 			switchbox(id);
 		});
 	});
-
+	var base_url = '';
+	var reset_boxes = function() {
+		$('.show-info img').attr('src', base_url+'public/images/favicon.ico');
+		$('.show-info').attr('data-original-title', '');
+		$('.show-info').attr('data-content', 'Empty slot');
+	}
 	var cleardata = function() {
 		localStorage.removeItem('boxesdata');
-		$('.show-info img').attr('src', 'public/images/favicon.ico');
-		$('.show-info').attr('data-original-title', '');
-		$('.show-info').attr('data-content', '');
+		reset_boxes();
 	}
 	var rawdata = '';
 	function process_box_data(str) {
-		$('.show-info img').attr('src', 'public/images/favicon.ico');
-		$('.show-info').attr('data-original-title', '');
-		$('.show-info').attr('data-content', '');
-		boxes = str.replace("\n| Box | Slot | Name | Nature | Ability | Spread | SV\n|:--|:--|:--|:--|:--|:--|:--\n", "");
-		temp = boxes.split("\n");
+		reset_boxes();
+		temp = str.replace("| Box | Slot | Name | Nature | Ability | Spread | SV\n|:--|:--|:--|:--|:--|:--|:--\n", "").replace(/^\s+|\s+$/g, '').split("\n");
 		for (var i = 0; i < temp.length; i++) {
 			pkm = temp[i];
 			var properties = pkm.split(" | ");
@@ -69,7 +69,7 @@
 				esv = properties[6];
 			};
 			// console.log(properties);
-			image = '<img src="public/images/minisprites/'+data_species+'.png" alt="">';
+			image = '<img src="'+base_url+'public/images/minisprites/'+data_species+'.png" alt="">';
 			data = "Nature: "+nature+"<br />"+"Ability: "+ability+"<br />"+"IVs Spread: "+spread;
 			if (properties[6]) {
 				data+="<br />"+"ESV: "+esv;

@@ -181,7 +181,6 @@
                         - Click <button class="btn btn-success btn-sm">Import</button> and a modal will appear, paste the data into the textarea. <br>
                         - Your data should be something like this:
                         <pre>
-[There should be a blank line here]
 | Box | Slot | Name | Nature | Ability | Spread | SV
 |:--|:--|:--|:--|:--|:--|:--
 | B2 | 1,1 | Tyrunt (M) | Adamant | Strong Jaw | 31.31.31.04.31.31 | 1164 |
