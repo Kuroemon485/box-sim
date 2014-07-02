@@ -130,7 +130,7 @@
                                             <?php for ($r=1; $r < 6; $r++): ?>
                                                 <tr>
                                                 <?php for ($c=1; $c < 7; $c++): ?>
-                                                    <td id="<?php echo $r."-".$c ?>" style="text-align: center;"><button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="top" data-content="Empty slot"><img src="public/images/favicon.ico" alt=""></button></td>
+                                                    <td id="<?php echo $r."-".$c ?>" style="text-align: center;"><button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="right" data-content="Empty slot"><img src="public/images/favicon.ico" alt=""></button></td>
                                                 <?php endfor ?>
                                                 </tr>
                                             <?php endfor ?>
@@ -214,7 +214,7 @@
 | B3 | 1,2 | Tyrunt (M) | Adamant | Strong Jaw | 07.31.31.31.31.31 | 4089 |
                         </pre>
                         - Click <button class="btn btn-sm btn-success">Submit</button>, your boxes are ready to view. <br>
-                        - If you think you get stuck or some thing. Click  <button class="btn btn-danger btn-sm" id="">Clear Data</button> then start over.
+                        - If you think you get stuck or some thing. Click  <button class="btn btn-danger btn-sm" id="">Clear Data</button> then start over. <br>
                         - I will try to add more format supporting as soon as I have time.
                     </p>
                 </div>

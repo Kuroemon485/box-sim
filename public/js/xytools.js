@@ -18,7 +18,7 @@
 		});
 		$('.show-info').popover({
             animation: true,
-            placement: 'top',
+            placement: 'right',
             selector: false,
             trigger: 'hover',
             delay: 0,
@@ -70,11 +70,12 @@
 			};
 			// console.log(properties);
 			image = '<img src="'+base_url+'public/images/minisprites/'+data_species+'.png" alt="">';
-			data = "Nature: "+nature+"<br />"+"Ability: "+ability+"<br />"+"IVs Spread: "+spread;
+			data = "<table class='table-condensed'><tr><th>Nature</th><td>"+nature+"</td></tr><tr><th>Ability</th><td>"+ability+"</td></tr><tr><th>IVs Spread</th><td>"+spread+"</td></tr>";
 			if (properties[6]) {
-				data+="<br />"+"ESV: "+esv;
+				data+="<tr><th>ESV</th><td>"+esv+"</td></tr>";
 				species = '<b class="text-red">[EGG]</b> '+species;
 			};
+			data += "</table>";
 			$('#'+box+' #'+position[0]+'-'+position[1]+" button").attr('data-content', data).attr('data-original-title', species).empty().append(image);
 		};
 		
