@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -6,10 +6,10 @@
 <meta name="author" content="DazeinCreative">
 <meta name="description" content="ORB - Powerfull and Massive Admin Dashboard Template with tonns of useful features">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Box Simulator | Pokemon X/Y</title>
+<title>ORB | Components</title>
 <link href="public/css/styles.css" rel="stylesheet" type="text/css">
 
-<link rel="shortcut icon" type="image/x-icon" href="public/img/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <script type="text/javascript" src="public/js/vendors/modernizr/modernizr.custom.js"></script>
 </head>
 
@@ -18,26 +18,34 @@
 <!--Smooth Scroll-->
 <div class="smooth-overflow">
 <!--Navigation-->
-    <nav class="main-header clearfix" role="navigation"> <a class="navbar-brand" href=""><span class="text-blue">CDB</span></a> 
+    <nav class="main-header clearfix" role="navigation"> <a class="navbar-brand" href="index.html"><span class="text-blue">ORB</span></a> 
+      
+     
       <!--Navigation Itself-->
+      
       <div class="navbar-content"> 
+        
         <!--Sidebar Toggler--> 
-        <button class="btn btn-default left-toggler pull-right"><i class="fa fa-bars"></i></button> 
+        <a href="#" class="btn btn-default left-toggler"><i class="fa fa-bars"></i></a> 
       </div>
     </nav>
+    
     <!--/Navigation--> 
     
     <!--MainWrapper-->
     <div class="main-wrap"> 
       
       <!--Main Menu-->
-      <!-- <div class="responsive-admin-menu">
+      <div class="responsive-admin-menu">
+        <div class="responsive-menu">ORB
+          <div class="menuicon"><i class="fa fa-angle-down"></i></div>
+        </div>
         <ul id="menu">
-          <li><a href="" title="Dashboard"><i class="fa fa-wrench"></i><span> Tools</span></a></li>
+          <li><a href="index.html" title="Dashboard"><i class="entypo-briefcase"></i><span> Dashboard</span></a></li>
             </ul>
           </li>
         </ul>
-      </div> -->
+      </div>
       <!--/MainMenu--> 
       
       <!--Content Wrapper-->
@@ -45,48 +53,53 @@
         <!--Breadcrumb-->
         <div class="breadcrumb clearfix">
           <ul>
-            <li><a href="http://competitiondb.io"><i class="fa fa-home"></i></a></li>
-            <li class="active">X/Y tools</li>
+            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+            <li><a href="index.html">Dashboard</a></li>
+            <li class="active">Data</li>
           </ul>
         </div>
         <!--/Breadcrumb-->
+        
+        <div class="page-header">
+          <h1>Components</h1>
+        </div>
         
         <!-- Widget Row Start grid -->
         <div class="row" id="">
           <div class="col-md-12 bootstrap-grid"> 
             <!-- tabs left -->
-            <div class="tabs-grey">
+            <div class="tabbable tabs-left tabs-grey">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#boxsim" data-toggle="tab"><i class="fa fa-inbox"></i> Box Simulator</a></li>
-                <li><a href="#boxsim" data-toggle="tab">Coming soon...</a></li>
+                <li class="active"><a href="#one-left" data-toggle="tab">One <span class="label label-default">Primary</span></a></li>
+                <li><a href="#two-left" data-toggle="tab">Two <span class="label label-danger">Danger</span></a></li>
+                <li><a href="#three-left" data-toggle="tab">Three <span class="label label-success">Yeah!</span></a></li>
               </ul>
               <div class="tab-content">
                 <!--Panel-->
                 
-                <div class="tab-pane active" id="boxsim">
+                <div class="tab-pane active" id="one-left">
                   <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
+                    <div class="col-sm-8 col-sm-offset-2">
                       <div class="panel panel-primary">
                         <div class="panel-heading">
-                          <div class="panel-title pull-left"><h4 class="box-title">Box 1</h4></div>
+                          <div class="panel-title pull-left box-title">Box 1</div>
                           <div class="pull-right">
                             <div class="btn-group">
-                              <button class="btn btn-success switch-box to-prev-box" data-to-box="#B30"><i class="fa fa-angle-left"></i></button>
+                              <button class="btn btn-sm btn-success switch-box to-prev-box" data-to-box="#B30"><i class="fa fa-angle-left"></i></button>
                               <div class="btn-group">
-                                  <button type="button" class="btn btn-success box-num dropdown-toggle" data-toggle="dropdown">1</button>
+
+                                  <button type="button" class="btn btn-sm btn-success box-num dropdown-toggle" data-toggle="dropdown">#B1</button>
                                   <ul class="dropdown-menu box-list" style="max-height: 300px; overflow-y: scroll;">
                                       <?php for ($bl=1; $bl < 31; $bl++): ?>
                                           <li><a href="#B<?php echo $bl ?>">Box <?php echo $bl ?></a></li>
                                       <?php endfor ?>
                                   </ul>
                               </div>
-                              <button class="btn btn-success switch-box to-next-box" data-to-box="#B2"><i class="fa fa-angle-right"></i></button>
+                              <button class="btn btn-sm btn-success switch-box to-next-box" data-to-box="#B2"><i class="fa fa-angle-right"></i></button>
                             </div>
-                            <div class="btn-group">
-                              <button class="btn btn-success" id="cim"><i class=" entypo-publish "></i></button>
-                              <button class="btn btn-success" id="cld"><i class="entypo-erase"></i></button>
-                              <button class="btn btn-success" id="cfm"><i class="entypo-help"></i></button>
-                            </div>
+                            <button class="btn btn-sm btn-success" id="cim">Import</button>
+                            <button class="btn btn-sm btn-danger" id="cld">Clear Data</button>
+                            <button class="btn btn-sm btn-success" id="cfm"><i class="fa fa-question"></i></button>
                           </div>
                           <div class="clearfix"></div>
                         </div>
@@ -97,9 +110,7 @@
                                   <?php for ($r=1; $r < 6; $r++): ?>
                                       <tr>
                                       <?php for ($c=1; $c < 7; $c++): ?>
-                                          <td id="<?php echo $r."-".$c ?>" style="text-align: center;">
-                                            <button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="right" data-content="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
-                                          </td>
+                                          <td id="<?php echo $r."-".$c ?>" style="text-align: center;"><button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="right" data-content="Empty slot"><img src="public/images/favicon.ico" alt=""></button></td>
                                       <?php endfor ?>
                                       </tr>
                                   <?php endfor ?>
@@ -295,14 +306,9 @@
 <!--Main App--> 
 <script type="text/javascript" src="public/js/scripts.js"></script>
 
-<script src="public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-
-<!-- exclusive scripts -->
-<script src="public/js/xytools.js"></script>
 
 <!--/Scripts-->
 
 </body>
 </html>
-

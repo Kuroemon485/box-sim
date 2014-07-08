@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Main Background*/
+html,
+body {
+	background-color: #9c8c40;
+}
+
+/*Disabling Shadows*/
+
+.responsive-admin-menu #menu li a.active,
+.responsive-admin-menu #menu li a.submenu.active {
+	box-shadow: none;
+}
+
+
+.content-wrapper {
+	box-shadow: none
+}
+
+/*User Button at right side of top menu*/
+.main-header .btn-user {
+	color: #9c8c40;
+	background-color: #9c8c40;
+}
+
+/*Ligher color for dropdown menus at responsive vertical menu*/
+.responsive-admin-menu #menu ul {
+	background-color: #9c8c40;
+}
+
+
+/*Hover Items in Media Query (Usually the same as Main BG color*/
+
+ @media screen and (max-width: 767px)  {
+.responsive-admin-menu #menu li.opened,
+.responsive-admin-menu #menu li.opened ul li,
+.responsive-admin-menu #menu li.opened + ul {
+	background:#9c8c40;
+}
+ }

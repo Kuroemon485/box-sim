@@ -274,7 +274,7 @@ html {
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.42857143;
   color: #333;
   background-color: #fff;
@@ -3762,7 +3762,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 8px;
   background-color: transparent;
   background-image: none;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: 4px;
 }
 .navbar-toggle:focus {
@@ -5310,17 +5310,18 @@ button.close {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
           box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
+
 .popover.top {
-  margin-top: -10px;
+  margin-top: -12px;
 }
 .popover.right {
-  margin-left: 10px;
+  margin-left: 12px;
 }
 .popover.bottom {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 .popover.left {
-  margin-left: -10px;
+  margin-left: -12px;
 }
 .popover-title {
   padding: 8px 14px;
@@ -5345,68 +5346,68 @@ button.close {
   border-style: solid;
 }
 .popover > .arrow {
-  border-width: 11px;
+  border-width: 12px;
 }
 .popover > .arrow:after {
   content: "";
-  border-width: 10px;
+  border-width: 12px;
 }
 .popover.top > .arrow {
-  bottom: -11px;
+  bottom: -12px;
   left: 50%;
-  margin-left: -11px;
+  margin-left: -12px;
   border-top-color: #999;
   border-top-color: rgba(0, 0, 0, .25);
   border-bottom-width: 0;
 }
 .popover.top > .arrow:after {
-  bottom: 1px;
-  margin-left: -10px;
+  bottom: 2px;
+  margin-left: -12px;
   content: " ";
   border-top-color: #fff;
   border-bottom-width: 0;
 }
 .popover.right > .arrow {
   top: 50%;
-  left: -11px;
-  margin-top: -11px;
+  left: -12px;
+  margin-top: -12px;
   border-right-color: #999;
   border-right-color: rgba(0, 0, 0, .25);
   border-left-width: 0;
 }
 .popover.right > .arrow:after {
-  bottom: -10px;
-  left: 1px;
+  bottom: -12px;
+  left: 2px;
   content: " ";
   border-right-color: #fff;
   border-left-width: 0;
 }
 .popover.bottom > .arrow {
-  top: -11px;
+  top: -12px;
   left: 50%;
-  margin-left: -11px;
+  margin-left: -12px;
   border-top-width: 0;
   border-bottom-color: #999;
   border-bottom-color: rgba(0, 0, 0, .25);
 }
 .popover.bottom > .arrow:after {
-  top: 1px;
-  margin-left: -10px;
+  top: 2px;
+  margin-left: -12px;
   content: " ";
   border-top-width: 0;
   border-bottom-color: #fff;
 }
 .popover.left > .arrow {
   top: 50%;
-  right: -11px;
-  margin-top: -11px;
+  right: -12px;
+  margin-top: -12px;
   border-right-width: 0;
   border-left-color: #999;
   border-left-color: rgba(0, 0, 0, .25);
 }
 .popover.left > .arrow:after {
-  right: 1px;
-  bottom: -10px;
+  right: 2px;
+  bottom: -12px;
   content: " ";
   border-right-width: 0;
   border-left-color: #fff;
