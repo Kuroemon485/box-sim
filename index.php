@@ -71,16 +71,16 @@
                           <div class="panel-title pull-left"><h4 class="box-title">Box 1</h4></div>
                           <div class="pull-right">
                             <div class="btn-group">
-                              <button class="btn btn-success switch-box to-prev-box" data-to-box="#B30"><i class="fa fa-angle-left"></i></button>
+                              <button class="btn btn-success switch-box to-prev-box" data-to-box="31"><i class="fa fa-angle-left"></i></button>
                               <div class="btn-group">
                                   <button type="button" class="btn btn-success box-num dropdown-toggle" data-toggle="dropdown">1</button>
                                   <ul class="dropdown-menu box-list" style="max-height: 300px; overflow-y: scroll;">
-                                      <?php for ($bl=1; $bl < 31; $bl++): ?>
+                                      <?php for ($bl=1; $bl <= 31; $bl++): ?>
                                           <li><a href="#B<?php echo $bl ?>">Box <?php echo $bl ?></a></li>
                                       <?php endfor ?>
                                   </ul>
                               </div>
-                              <button class="btn btn-success switch-box to-next-box" data-to-box="#B2"><i class="fa fa-angle-right"></i></button>
+                              <button class="btn btn-success switch-box to-next-box" data-to-box="2"><i class="fa fa-angle-right"></i></button>
                             </div>
                             <div class="btn-group">
                               <button class="btn btn-success" id="cim"><i class=" entypo-publish "></i></button>
@@ -91,8 +91,8 @@
                           <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
-                          <?php for ($b=1; $b < 31; $b++): ?>
-                              <table class="table poke-box" <?php if ($b >= 2) echo 'style="display: none"' ?> id="B<?php echo $b ?>">
+                          <?php #for ($b=1; $b <= 31; $b++): ?>
+                              <table class="table poke-box" data-box-num="1">
                                   <tbody>
                                   <?php for ($r=1; $r < 6; $r++): ?>
                                       <tr>
@@ -105,7 +105,7 @@
                                   <?php endfor ?>
                                   </tbody>
                               </table>
-                          <?php endfor ?>
+                          <?php #endfor ?>
                         </div>
                       </div>
                     </div>
@@ -138,6 +138,14 @@
         <h4 class="modal-title" id="notice-title">Raw Data</h4>
         </div>
       <div class="modal-body">
+          <div class="inline-group">
+            <label class="radio">
+              <input type="radio" name="format" id="reddit" checked>
+              <i></i>Reddit</label>
+            <label class="radio">
+              <input type="radio" name="format" id="csv">
+              <i></i>CSV</label>
+          </div>
           <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
       </div>
       <div class="modal-footer">
@@ -228,72 +236,12 @@
 <script type="text/javascript" src="public/js/vendors/forms/jquery.maskedinput.min.js"></script> 
 <script type="text/javascript" src="public/js/vendors/jquery-steps/jquery.steps.min.js"></script> 
 
-<!--NanoScroller--> 
-<script type="text/javascript" src="public/js/vendors/nanoscroller/jquery.nanoscroller.min.js"></script> 
-
-<!--Sparkline--> 
-<script type="text/javascript" src="public/js/vendors/sparkline/jquery.sparkline.min.js"></script> 
-
-<!--Horizontal Dropdown--> 
-<script type="text/javascript" src="public/js/vendors/horisontal/cbpHorizontalSlideOutMenu.js"></script> 
-<script type="text/javascript" src="public/js/vendors/classie/classie.js"></script> 
-
-<!--Datatables--> 
-<script type="text/javascript" src="public/js/vendors/datatables/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/datatables/jquery.dataTables-bootstrap.js"></script> 
-<script type="text/javascript" src="public/js/vendors/datatables/dataTables.colVis.js"></script> 
-<script type="text/javascript" src="public/js/vendors/datatables/colvis.extras.js"></script> 
-
-<!--PowerWidgets--> 
-<script type="text/javascript" src="public/js/vendors/powerwidgets/powerwidgets.min.js"></script> 
-
-<!--Summernote--> 
-<script type="text/javascript" src="public/js/vendors/summernote/summernote.min.js"></script> <!--Morris Chart--> 
-<script type="text/javascript" src="public/js/vendors/raphael/raphael-min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/morris/morris.min.js"></script> 
-
-<!--FlotChart--> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.stack.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.categories.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.time.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.resize.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.axislabels.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot-tooltip.js"></script> 
-<script type="text/javascript" src="public/js/vendors/flotchart/jquery.flot.pie.min.js"></script> 
-
-<!--Calendar--> 
-<script type="text/javascript" src="public/js/vendors/fullcalendar/fullcalendar.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/fullcalendar/gcal.js"></script> 
 
 <!--Bootstrap--> 
 <script type="text/javascript" src="public/js/vendors/bootstrap/bootstrap.min.js"></script> 
 
 <!--Bootstrap Progress Bar--> 
 <script type="text/javascript" src="public/js/vendors/bootstrap-progress-bar/bootstrap-progressbar.min.js"></script> 
-
-<!--iOnRangeSlider--> 
-<script type="text/javascript" src="public/js/vendors/ionrangeslider/ion.rangeSlider.min.js"></script> 
-
-<!--Vector Map--> 
-<script type="text/javascript" src="public/js/vendors/vector-map/jquery.vmap.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/vector-map/jquery.vmap.sampledata.js"></script> 
-<script type="text/javascript" src="public/js/vendors/vector-map/jquery.vmap.world.js"></script> 
-<script type="text/javascript" src="public/js/vendors/vector-map/jquery.vmap.usa.js"></script> 
-<script type="text/javascript" src="public/js/vendors/vector-map/jquery.vmap.europe.js"></script> 
-<script type="text/javascript" src="public/js/vendors/vector-map/jquery.vmap.russia.js"></script> 
-
-<!--ToDo--> 
-<script type="text/javascript" src="public/js/vendors/todos/todos.js"></script> 
-
-<!--Nestable--> 
-<script type="text/javascript" src="public/js/vendors/nestable-lists/jquery.nestable.js"></script> 
-
-<!--FitVids--> 
-<script type="text/javascript" src="public/js/vendors/fitvids/jquery.fitvids.js"></script> 
-
-<!--Main App--> 
-<script type="text/javascript" src="public/js/scripts.js"></script>
 
 <script src="public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
