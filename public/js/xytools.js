@@ -4,14 +4,16 @@
 (function($, window, document) {
 	
 	$(function() {
-		console.log($.parseJSON(localStorage.getItem('boxesData')))
+		$('#ccm').on('click', function() {
+			$('#approve-modal').modal('show');	
+		});
 		$('#cld').on('click', function () {
 			cleardata();
 		});
 		$('#faqs-modal .modal-body').slimscroll({
             height: "400px",
             size: "5px",
-            alwaysVisible: false,
+            alwaysVisible: true,
             wheelStep:1,
             size: "3px"
         });
@@ -23,6 +25,20 @@
 		});
 		$('#cfm').on('click', function () {
 			$('#faqs-modal').modal('show');
+		});
+		$('.show-info').hover(function() {
+        	box = $('.poke-box').attr('data-box-num');
+        	pos = $(this).parent().attr('id');
+        	render_info(box, pos);
+        });
+		$('.show-info').on('click', function(event) {
+			event.preventDefault();
+			if ($(this).hasClass('has-pkm')) {
+				box = $('.poke-box').attr('data-box-num');
+	        	pos = $(this).parent().attr('id');
+	        	render_pkm_detail_modal(box, pos);
+				$('#pkm-detail-modal').modal('show');
+			};
 		});
 		$('.show-info').popover({
             animation: true,
@@ -59,14 +75,20 @@
 	var stats = ['hp', 'atk', 'def', 'satk', 'sdef', 'spd'];
 	var reset_boxes = function() {
 		$('.show-info img').attr('src', base_url+'public/images/favicon.ico');
-		$('.show-info').attr('data-original-title', '');
-		$('.show-info').attr('data-content', 'Empty slot');
+		$('.show-info').attr('data-original-title', 'Empty slot').attr('data-content', '-').removeClass('has-pkm');
+		$('#approve-modal').modal('hide');
+	}
+	var reset_detail_modal = function() {
+		$('.detail', pkmdm).html('-');
 	}
 	var cleardata = function() {
 		localStorage.removeItem('boxesData');
 		reset_boxes();
 	}
 	var rawdata = '';
+	var all_boxes = $.parseJSON(localStorage.getItem('boxesData'));
+	var pkmdm = '#pkm-detail-modal';
+
 	function process_boxes_data(str, format) {
 		var boxes = {};
 		reset_boxes();
@@ -119,6 +141,31 @@
 					boxes[box_no][pos]['move2'] = properties[28];
 					boxes[box_no][pos]['move3'] = properties[29];
 					boxes[box_no][pos]['move4'] = properties[30];
+					boxes[box_no][pos]['i_m1'] = properties[31]; // i_m = inherited move
+					boxes[box_no][pos]['i_m2'] = properties[32];
+					boxes[box_no][pos]['i_m3'] = properties[33];
+					boxes[box_no][pos]['i_m4'] = properties[34];
+					switch (properties[35]) {
+						case "★":
+						boxes[box_no][pos]['is_shiny'] = true;
+						break;
+						case "":
+						boxes[box_no][pos]['is_shiny'] = false;
+						break;
+						default:
+						break;
+					}
+					switch (properties[36]) {
+						case "✓":
+						boxes[box_no][pos]['is_egg'] = true;
+						break;
+						case "":
+						boxes[box_no][pos]['is_egg'] = false;
+						break;
+						default:
+						break;
+					}
+					
 				};
 			break;
 
@@ -164,51 +211,112 @@
 
 			break;
 		}
-		
 		localStorage.setItem('boxesData', JSON.stringify(boxes));
+		all_boxes = boxes;
 		console.log(boxes);
 		return boxes;
 	}
 	function render_box(b_n) {
 		reset_boxes();
-		boxes = JSON.parse(localStorage.getItem('boxesData'));
-		if ( boxes == undefined || boxes[b_n] == undefined) {
+		if ( all_boxes == undefined || all_boxes[b_n] == undefined) {
 			reset_boxes();
 			return;
 		};
 		// console.log(boxes);
-		box = boxes[b_n];
+		box = all_boxes[b_n];
 		
 		// console.log(box);
 		$.each(box, function(index, val) {
 			// console.log(val)
-			species = val.species;
-			gender = "";
-			if (val['gender'] != "-") {
-				gender = val.gender;
-			};
-			nature = val.nature;
-			ability = val.ability;
-			esv = val.esv;
 			pos = index;
-			iv_spread = []
-			$.each(stats, function(ind, el) {
-				if (val[el+'_iv'] != 31) {
-					iv_spread[ind] = val[el+'_iv'];
-				} else {
-					iv_spread[ind] = '<b class="text-red">31</b>';
-				}
-			});
-			iv = iv_spread.join('-');
+			species = val.species;
 			image = '<img src="'+base_url+'public/images/minisprites/'+species+'.png" alt="">';
-			data = "<table class='table-condensed'><tr><th>Nature</th><td>"+nature+"</td></tr><tr><th>Ability</th><td>"+ability+"</td></tr><tr><th>IVs Spread</th><td>"+iv+"</td></tr>";
-			if (esv != "") {
-				data+="<tr><th>ESV</th><td>"+esv+"</td></tr>";
-				species = '<b class="text-red">[EGG]</b> '+species;
-			};
-			data += "</table>";
-			$('#'+pos+' button').attr('data-content', data).attr('data-original-title', species+" "+gender).empty().append(image);
+			$('#'+pos+' button').empty().append(image).addClass('has-pkm');
 		});
+	}
+	function render_info(box, position) {
+		if ( all_boxes == undefined || all_boxes[box] == undefined || all_boxes[box][position] == undefined) {
+			return;
+		};
+		pkm = all_boxes[box][position];
+		species = pkm.species;
+		gender = "";
+		if (pkm.gender != "-") {
+			if (pkm.gender == "♀") {
+				gender = '<b class="text-red">'+pkm.gender+'</b>';
+			} else {
+				gender = '<b class="text-blue">'+pkm.gender+'</b>';
+			}
+		};
+		nature = pkm.nature;
+		ability = pkm.ability;
+		esv = pkm.esv;
+		iv_spread = []
+		$.each(stats, function(ind, el) {
+			if (pkm[el+'_iv'] != 31) {
+				iv_spread[ind] = pkm[el+'_iv'];
+			} else {
+				iv_spread[ind] = '<b class="text-red">31</b>';
+			}
+		});
+		iv = iv_spread.join('-');
+		data = "<table class='table-condensed'><tr><th>Nature</th><td>"+nature+"</td>";
+		if (pkm.is_shiny) {
+			data+= '<td><span class="label label-danger">Shiny</span></td>';
+		};
+		data+="</tr><tr><th>Ability</th><td colspan='2'>"+ability+"</td></tr><tr><th>IVs Spread</th><td colspan='2'>"+iv+"</td></tr>";
+		if (pkm.is_egg) {
+			data+="<tr><th>ESV</th><td colspan='2'>"+esv+"</td></tr>";
+			species = '<b class="text-red">[EGG]</b> '+species;
+		};
+		data += "</table>";
+		$('#'+position+' button').attr('data-content', data).attr('data-original-title', species+" "+gender);
+	}
+	function render_pkm_detail_modal(box, position) {
+		reset_detail_modal();
+		pkm = all_boxes[box][position];
+		console.log(pkm);
+		switch(pkm.gender)  {
+			case "♀":
+				$('.gender', pkmdm).addClass('text-red');
+			break;
+			case "♂":
+				$('.gender', pkmdm).addClass('text-blue');
+			break;
+			default:
+			break;
+		}
+		icon = '<img src="'+base_url+'public/images/minisprites/'+pkm.species+'.png" alt="">';
+		pos = "Box "+box+"["+position+"]";
+		modal_title = icon+[pkm.species, pos].join(" - ");
+		$('.modal-title', pkmdm).html(modal_title);
+		switch (pkm.is_shiny) {
+			case true:
+				image = '<img src="'+base_url+'public/images/f-sprite-shiny/'+pkm.species+'.gif" alt="">';
+				break;
+			default:
+				image = '<img src="'+base_url+'public/images/f-sprite/'+pkm.species+'.gif" alt="">';
+				break;
+		}
+		$('.image', pkmdm).html(image)
+		$.each(pkm, function(index, val) {
+			switch (val) {
+				case "31":
+					$("."+index, pkmdm).html('<span class="text-red">'+val+'</span>');
+					break;
+				case '(None)':
+					$("."+index, pkmdm).html('-');
+				default:
+					$("."+index, pkmdm).html(val);
+					break;
+			}
+		});
+		if (pkm.is_egg) {
+			$('.egg', pkmdm).html('<span class="label label-success">egg</span>');
+		};
+		if (pkm.is_shiny) {
+			$('.shiny', pkmdm).html('<span class="label label-danger">shiny</span>');
+		};
 	}
 	function check_localStorage() {
 		if (localStorage.getItem('boxesData') != null) {
@@ -234,6 +342,7 @@
 		}
 		render_box(b_n);
 		boxname = 'Box '+b_n;
+		$('.poke-box').attr('data-box-num', b_n);
 		$('.box-title').text(boxname);
 		$('.box-num').text(b_n);
 	}

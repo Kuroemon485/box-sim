@@ -45,7 +45,7 @@
         <!--Breadcrumb-->
         <div class="breadcrumb clearfix">
           <ul>
-            <li><a href="http://competitiondb.io"><i class="fa fa-home"></i></a></li>
+            <li><a href=""><i class="fa fa-home"></i></a></li>
             <li class="active">X/Y tools</li>
           </ul>
         </div>
@@ -65,7 +65,7 @@
                 
                 <div class="tab-pane active" id="boxsim">
                   <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
+                    <div class="col-md-6 col-md-offset-3">
                       <div class="panel panel-primary">
                         <div class="panel-heading">
                           <div class="panel-title pull-left"><h4 class="box-title">Box 1</h4></div>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="btn-group">
                               <button class="btn btn-success" id="cim"><i class=" entypo-publish "></i></button>
-                              <button class="btn btn-success" id="cld"><i class="entypo-erase"></i></button>
+                              <button class="btn btn-success" id="ccm"><i class="entypo-erase"></i></button>
                               <button class="btn btn-success" id="cfm"><i class="entypo-help"></i></button>
                             </div>
                           </div>
@@ -98,7 +98,7 @@
                                       <tr>
                                       <?php for ($c=1; $c < 7; $c++): ?>
                                           <td id="<?php echo $r."-".$c ?>" style="text-align: center;">
-                                            <button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="right" data-content="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
+                                            <button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="right" data-content="-" data-original-title="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
                                           </td>
                                       <?php endfor ?>
                                       </tr>
@@ -130,7 +130,7 @@
 <!--/Smooth Scroll--> 
 <!--Modals--> 
 
-<div class="modal" id="import-modal">
+<div class="modal fade" id="import-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -139,12 +139,8 @@
         </div>
       <div class="modal-body">
           <div class="inline-group">
-            <label class="radio">
-              <input type="radio" name="format" id="reddit" checked>
-              <i></i>Reddit</label>
-            <label class="radio">
-              <input type="radio" name="format" id="csv">
-              <i></i>CSV</label>
+            <label class="radio"><input type="radio" name="format" id="csv" checked><i></i>CSV</label>
+            <label class="radio"><input type="radio" name="format" id="reddit" ><i></i>Reddit</label>
           </div>
           <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
       </div>
@@ -157,8 +153,78 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+<div class="modal fade" id="approve-modal">
+  <div class="modal-dialog modal-sm" id="">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 class="modal-title">Clear all boxes's data</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="" data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+        <button id="cld" class="btn btn-danger" type="button">OK</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+</div>
 <!-- /.modal --> 
-<div class="modal" id="faqs-modal">
+<div class="modal fade" id="pkm-detail-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="pull-right btn btn-sm btn-danger" data-dismiss="modal" aria-hidden="true"><b>&times;</b></button>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+        <h4 class="modal-title" id=""></h4>
+        </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-7">
+              <table class="table condensed-table">
+                <tr><td colspan="2" class="detail shiny">-</td><td colspan="2" class="detail egg">-</td></tr>
+                <tr><td>Nickname</td><th class="detail nname">-</th><td>ESV</td><th><span class="text-red detail esv"></span></th></tr>
+                <tr><td>Species</td><th colspan="2" class="detail species">-</th><th><b class="detail gender"></b></th></tr>
+                <tr><td>Ability</td><th colspan="3" class="detail ability">-</th></tr>
+                <tr><td>Nature</td><th colspan="3" class="detail nature">-</th></tr>
+                <tr><td>OT</td><th colspan="3" class="detail ot">-</th></tr>
+                <tr><td>TID</td><th class="detail tid">-</th><td>SID</td><th class="detail sid">-</th></tr>
+              </table>
+            </div>
+            <div class="col-sm-5">
+              <table class="table condensed-table">
+                <tr><td></td><td><span class="label label-primary">IV</span></td><td><span class="label label-success">EV</span></td></tr>
+                <tr><td>HP</td><th class="detail hp_iv">-</th><th class="detail hp_ev">-</th></tr>
+                <tr><td>Attack</td><th class="detail atk_iv">-</th><th class="detail atk_ev">-</th></tr>
+                <tr><td>Defense</td><th class="detail def_iv">-</th><th class="detail def_ev">-</th></tr>
+                <tr><td>Sp. Attack</td><th class="detail satk_iv">-</th><th class="detail satk_ev">-</th></tr>
+                <tr><td>Sp. Defense</td><th class="detail sdef_iv">-</th><th class="detail sdef_ev">-</th></tr>
+                <tr><td>Speed</td><th class="detail spd_iv">-</th><th class="detail spd_ev">-</th></tr>
+              </table>
+            </div>
+            <div class="col-sm-5 image" style="text-align: center">
+              
+            </div>
+            <div class="col-sm-7">
+              <table class="table table-condensed">
+                <tr><th>Moves</th><th>Inherited Moves</th></tr>
+                <tr><td class="col-sm-6 detail move1">-</td><td class="col-sm-6 detail i_m1">-</td></tr>
+                <tr><td class="col-sm-6 detail move2">-</td><td class="col-sm-6 detail i_m2">-</td></tr>
+                <tr><td class="col-sm-6 detail move3">-</td><td class="col-sm-6 detail i_m3">-</td></tr>
+                <tr><td class="col-sm-6 detail move4">-</td><td class="col-sm-6 detail i_m4">-</td></tr>
+              </table>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
+<div class="modal fade" id="faqs-modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -167,9 +233,9 @@
         </div>
       <div class="modal-body">
           <p>
-            - Get you boxes data from <b class="text-red">MassDumper</b>, using <b class="text-red">Reddit's format</b>. <br>
-            - Click <button class="btn btn-success btn-sm">Import</button> and a modal will appear, paste the data into the textarea. <br>
-            - Your data should be something like this:
+            - Get you boxes data from <b class="text-red">KeySAV2</b>, using <b class="text-red">Reddit's format</b> or <b class="text-red">CSV format</b>.<br>
+            - Click <button class="btn btn-success btn-sm"><i class="entypo-publish"></i></button> and a modal will appear, paste data into textarea. <br>
+            - Your <b class="text-red">Reddit</b> data should be something like this:
             <pre>
 | Box | Slot | Name | Nature | Ability | Spread | SV
 |:--|:--|:--|:--|:--|:--|:--
@@ -185,26 +251,23 @@
 | B27 | 5,4 | Heracross (M) | Adamant | Moxie | 31.31.31.22.06.31 | 0503 |
 | B27 | 5,5 | Heracross (F) | Adamant | Swarm | 31.31.04.22.31.31 | 3160 |
     </pre>
-    Or just this:
+    <b class="text-red">CSV format</b> should be like this:
     <pre>
-| B2 | 1,1 | Tyrunt (M) | Adamant | Strong Jaw | 31.31.31.04.31.31 | 1164 |
-| B2 | 1,2 | Tyrunt (F) | Adamant | Strong Jaw | 31.31.31.31.29.31 | 0246 |
-| B2 | 1,3 | Tyrunt (M) | Adamant | Strong Jaw | 31.29.31.31.31.31 | 2815 |
-| B2 | 1,4 | Heracross (M) | Adamant | Swarm | 31.31.31.31.31.31 | 2864 |
-| B2 | 1,6 | Kangaskhan (F) | Jolly | Scrappy | 31.31.31.09.31.31 | 1468 |
-| B2 | 2,1 | Eevee (M) | Calm | Adaptability | 31.13.29.31.31.31 | 3914 |
-| B2 | 2,2 | Kangaskhan (F) | Jolly | Scrappy | 31.31.31.31.31.31 | 0898 |
-| B2 | 2,4 | Honedge (M) | Quiet | No Guard | 31.31.31.31.31.28 | 0202 |
-| B2 | 2,6 | Honedge (M) | Quiet | No Guard | 31.31.31.31.31.28 | 3377 |
-| B2 | 3,4 | Kangaskhan (F) | Jolly | Scrappy | 31.31.31.15.31.31 | 3196 |
-| B2 | 4,2 | Heracross (M) | Adamant | Moxie | 31.31.31.00.31.31 | 4040 |
-| B2 | 4,3 | Heracross (M) | Adamant | Moxie | 31.31.31.22.31.31 | 0717 |
-| B2 | 4,5 | Heracross (M) | Adamant | Moxie | 31.31.31.00.31.31 | 0823 |
-| B3 | 1,1 | Tyrunt (M) | Adamant | Strong Jaw | 30.31.09.31.31.31 | 2819 |
-| B3 | 1,2 | Tyrunt (M) | Adamant | Strong Jaw | 07.31.31.31.31.31 | 4089 |
+Box,Row,Column,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Relearn 1, Relearn 2, Relearn 3, Relearn 4, Shiny, Egg
+B02,1,1,Croagunk,♀,Adamant,Dry Skin,31,31,29,31,21,31,Dark,,1231,Croagunk,Braviary,Poké Ball,54341,39100,0,0,0,0,0,0,Astonish,(None),(None),(None),Astonish,(None),(None),(None),,
+B02,1,2,Croagunk,♂,Adamant,Dry Skin,31,31,31,31,25,31,Dark,,1231,Croagunk,Braviary,Poké Ball,54341,39100,0,0,0,0,0,0,Astonish,(None),(None),(None),Astonish,(None),(None),(None),,
+B02,1,3,Croagunk,♀,Adamant,Anticipation,31,1,31,31,31,31,Dark,,1231,Croagunk,Braviary,Poké Ball,54341,39100,0,0,0,0,0,0,Astonish,(None),(None),(None),Astonish,(None),(None),(None),,
+.
+.
+.
+B31,1,4,Ditto,-,Quiet,Limber,31,31,31,31,31,0,Ice,,2268,Snowflake,ズキ,Dive Ball,34497,02830,252,51,51,51,51,51,Transform,(None),(None),(None),(None),(None),(None),(None),★,
+B31,1,5,Ditto,-,Adamant,Limber,31,31,31,31,31,31,Dark,,2268,メタモン,ズキ,Heavy Ball,34497,02830,252,51,51,51,51,51,Transform,(None),(None),(None),(None),(None),(None),(None),★,
+B31,1,6,Ditto,-,Timid,Limber,31,31,31,31,31,31,Dark,,2268,Destiny,ズキ,Heavy Ball,34497,02830,252,51,51,51,51,51,Transform,(None),(None),(None),(None),(None),(None),(None),★,
+B31,2,1,Ditto,-,Brave,Limber,31,31,31,31,31,0,Ice,,2268,Trick,ズキ,Quick Ball,34497,02830,252,51,51,51,51,51,Transform,(None),(None),(None),(None),(None),(None),(None),★,
+B31,3,1,Ditto,-,Modest,Limber,31,31,31,31,31,31,Dark,,2268,Babymaker,ズキ,Heavy Ball,34497,02830,252,51,51,51,51,51,Transform,(None),(None),(None),(None),(None),(None),(None),★,
             </pre>
             - Click <button class="btn btn-sm btn-success">Submit</button>, your boxes are ready to view. <br>
-            - If you think you get stuck or some thing. Click  <button class="btn btn-danger btn-sm" id="">Clear Data</button> then start over. <br>
+            - If you think you get stuck or some thing. Click  <button class="btn btn-danger btn-sm" id=""><i class="entypo-erase"></i></button> then confirm to start over. <br>
             - I will try to add more format supporting as soon as I have time.
         </p>
       </div>
@@ -222,10 +285,6 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 <script type="text/javascript" src="public/js/vendors/jquery/jquery.min.js"></script> 
 <script type="text/javascript" src="public/js/vendors/jquery/jquery-ui.min.js"></script> 
-
-<!--EasyPieChart--> 
-<script type="text/javascript" src="public/js/vendors/easing/jquery.easing.1.3.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/easypie/jquery.easypiechart.min.js"></script> 
 
 <!--Fullscreen--> 
 <script type="text/javascript" src="public/js/vendors/fullscreen/screenfull.min.js"></script> 
@@ -245,8 +304,7 @@
 
 <script src="public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-
-<!-- exclusive scripts -->
+<!-- Main scripts -->
 <script src="public/js/xytools.js"></script>
 
 <!--/Scripts-->
