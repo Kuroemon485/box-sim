@@ -43,12 +43,12 @@
       <!--Content Wrapper-->
       <div class="content-wrapper"><!--Horisontal Dropdown-->
         <!--Breadcrumb-->
-        <div class="breadcrumb clearfix">
+        <!-- <div class="breadcrumb clearfix">
           <ul>
             <li><a href=""><i class="fa fa-home"></i></a></li>
             <li class="active">X/Y tools</li>
           </ul>
-        </div>
+        </div> -->
         <!--/Breadcrumb-->
         
         <!-- Widget Row Start grid -->
@@ -65,7 +65,7 @@
                 
                 <div class="tab-pane active" id="boxsim">
                   <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
+                    <div class="col-md-5 col-md-offset-2">
                       <div class="panel panel-primary">
                         <div class="panel-heading">
                           <div class="panel-title pull-left"><h4 class="box-title">Box 1</h4></div>
@@ -98,7 +98,7 @@
                                       <tr>
                                       <?php for ($c=1; $c < 7; $c++): ?>
                                           <td id="<?php echo $r."-".$c ?>" style="text-align: center;">
-                                            <button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-placement="right" data-content="-" data-original-title="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
+                                            <button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-content="---------" data-original-title="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
                                           </td>
                                       <?php endfor ?>
                                       </tr>
@@ -108,6 +108,9 @@
                           <?php #endfor ?>
                         </div>
                       </div>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" class="form-control" id="search-input" placeholder="Search by species">
                     </div>
                   </div>
                 </div> <!-- Panel -->
@@ -138,11 +141,11 @@
         <h4 class="modal-title" id="notice-title">Raw Data</h4>
         </div>
       <div class="modal-body">
-          <div class="inline-group">
-            <label class="radio"><input type="radio" name="format" id="csv" checked><i></i>CSV</label>
-            <label class="radio"><input type="radio" name="format" id="reddit" ><i></i>Reddit</label>
-          </div>
-          <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+        <div class="inline-group">
+          <label class="radio-inline"><input type="radio" name="format" id="csv" checked><b>CSV</b></label>
+          <label class="radio-inline"><input type="radio" name="format" id="reddit" ><b>Reddit</b></label>
+        </div>
+        <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
       </div>
       <div class="modal-footer">
         <button class="btn btn-sm btn-success" id="impd">Submit</button>
@@ -176,7 +179,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="pull-right btn btn-sm btn-danger" data-dismiss="modal" aria-hidden="true"><b>&times;</b></button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><b>&times;</b></button>
         <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
         <h4 class="modal-title" id=""></h4>
         </div>
@@ -184,9 +187,9 @@
           <div class="row">
             <div class="col-sm-7">
               <table class="table condensed-table">
-                <tr><td colspan="2" class="detail shiny">-</td><td colspan="2" class="detail egg">-</td></tr>
+                <tr><td colspan="" class="detail shiny">-</td><td colspan="3" class="detail egg">-</td></tr>
                 <tr><td>Nickname</td><th class="detail nname">-</th><td>ESV</td><th><span class="text-red detail esv"></span></th></tr>
-                <tr><td>Species</td><th colspan="2" class="detail species">-</th><th><b class="detail gender"></b></th></tr>
+                <tr><td>Species</td><th colspan="" class="detail species">-</th><th colspan=""><b class="detail gender"></b></th><th class="pkball"></th></tr>
                 <tr><td>Ability</td><th colspan="3" class="detail ability">-</th></tr>
                 <tr><td>Nature</td><th colspan="3" class="detail nature">-</th></tr>
                 <tr><td>OT</td><th colspan="3" class="detail ot">-</th></tr>
@@ -196,16 +199,18 @@
             <div class="col-sm-5">
               <table class="table condensed-table">
                 <tr><td></td><td><span class="label label-primary">IV</span></td><td><span class="label label-success">EV</span></td></tr>
-                <tr><td>HP</td><th class="detail hp_iv">-</th><th class="detail hp_ev">-</th></tr>
-                <tr><td>Attack</td><th class="detail atk_iv">-</th><th class="detail atk_ev">-</th></tr>
-                <tr><td>Defense</td><th class="detail def_iv">-</th><th class="detail def_ev">-</th></tr>
-                <tr><td>Sp. Attack</td><th class="detail satk_iv">-</th><th class="detail satk_ev">-</th></tr>
-                <tr><td>Sp. Defense</td><th class="detail sdef_iv">-</th><th class="detail sdef_ev">-</th></tr>
-                <tr><td>Speed</td><th class="detail spd_iv">-</th><th class="detail spd_ev">-</th></tr>
+                <tr><td class="text-green">HP</td><th class="detail hp_iv">-</th><th class="detail hp_ev">-</th></tr>
+                <tr><td class="text-yellow">Attack</td><th class="detail atk_iv">-</th><th class="detail atk_ev">-</th></tr>
+                <tr><td class="text-orange">Defense</td><th class="detail def_iv">-</th><th class="detail def_ev">-</th></tr>
+                <tr><td class="text-marine">Sp. Attack</td><th class="detail satk_iv">-</th><th class="detail satk_ev">-</th></tr>
+                <tr><td class="text-blue">Sp. Defense</td><th class="detail sdef_iv">-</th><th class="detail sdef_ev">-</th></tr>
+                <tr><td class="text-purple">Speed</td><th class="detail spd_iv">-</th><th class="detail spd_ev">-</th></tr>
               </table>
             </div>
-            <div class="col-sm-5 image" style="text-align: center">
-              
+          </div>
+          <div class="row">
+            <div class="col-sm-5 image" style="text-align: center; padding: 15px 0px;">
+              <!-- <div data-widget-editbutton="false" id="" class="powerwidget powerwidget-as-portlet image"role="widget" style=""></div> -->
             </div>
             <div class="col-sm-7">
               <table class="table table-condensed">

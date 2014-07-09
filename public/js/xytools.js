@@ -40,14 +40,27 @@
 				$('#pkm-detail-modal').modal('show');
 			};
 		});
-		$('.show-info').popover({
-            animation: true,
-            placement: 'right',
-            selector: false,
+		var poptions = {
+	    	placement: function (context, source) {
+		        var position = $(source).position();
+		        if (position.left > 350) {
+		            return "left";
+		        }
+		        if (position.left < 350) {
+		            return "right";
+		        }
+		        if (position.top < 120){
+		            return "bottom";
+		        }
+		        return "top";
+		    },
+		    animation: true,
+		    selector: false,
             trigger: 'hover',
             delay: 0,
             html: true,
-        });
+		};
+		$('.show-info').popover(poptions);
 		$('#impd').on('click', function() {
 			rawdata = $('#import-modal textarea').val();
 			format = $('[name="format"]:checked').attr('id');
@@ -298,6 +311,7 @@
 				image = '<img src="'+base_url+'public/images/f-sprite/'+pkm.species+'.gif" alt="">';
 				break;
 		}
+		$('.pkball', pkmdm).html('<img src="'+base_url+'public/images/balls/'+pkm.ball+'.png" alt="">')
 		$('.image', pkmdm).html(image)
 		$.each(pkm, function(index, val) {
 			switch (val) {
@@ -345,5 +359,10 @@
 		$('.poke-box').attr('data-box-num', b_n);
 		$('.box-title').text(boxname);
 		$('.box-num').text(b_n);
+	}
+	function search(keyword) {
+		$.each(all_boxes, function(index, val) {
+			
+		});
 	}
 }(window.jQuery, window, document));

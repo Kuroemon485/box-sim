@@ -2192,7 +2192,7 @@ a.list-group-item-warning:focus { border-color: #f0ad4e }
 	overflow-x:hidden;
 	top: 0px;
 	padding: 15px;
-	margin: 0 10px 0 0;
+	margin: 0 10px;
 	/*margin-left: 200px;*/
 	height: auto !important;
 	height: 100%;
