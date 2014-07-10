@@ -17,8 +17,20 @@
             wheelStep:1,
             size: "3px"
         });
+        $('#result').slimscroll({
+            height: "357px",
+            size: "5px",
+            alwaysVisible: true,
+            wheelStep:1,
+            size: "3px"
+        });
         if (check_localStorage()) {
-        	render_box(1);
+        		console.log(check_last_box())
+        	if (check_last_box()) {
+        		switchbox(check_last_box());
+        	} else {
+        		switchbox(1);
+        	}
         };
 		$('#cim').on('click', function () {
 			$('#import-modal').modal('show');
@@ -79,15 +91,26 @@
 			id = $(this).attr('href').replace("#B", "");
 			switchbox(id);
 		});
-		$('.switch-box').on('click', function () {
+		$(document).on('click','.switch-box', function () {
 			id = $(this).attr('data-to-box');
 			switchbox(id);
+		});
+		$('#search-input').on('keyup', function() {
+			if ($(this).val().length >= 3) {
+				render_result(search($(this).val()));
+			};
 		});
 	});
 	var base_url = '';
 	var stats = ['hp', 'atk', 'def', 'satk', 'sdef', 'spd'];
+	var search_result = {};
+	var rawdata = '';
+	var all_boxes = $.parseJSON(localStorage.getItem('boxesData'));
+	var pkmdm = '#pkm-detail-modal';
+
 	var reset_boxes = function() {
 		$('.show-info img').attr('src', base_url+'public/images/favicon.ico');
+		$('.show-info').removeClass('btn-danger btn-success btn-warning btn-primary');
 		$('.show-info').attr('data-original-title', 'Empty slot').attr('data-content', '-').removeClass('has-pkm');
 		$('#approve-modal').modal('hide');
 	}
@@ -98,9 +121,6 @@
 		localStorage.removeItem('boxesData');
 		reset_boxes();
 	}
-	var rawdata = '';
-	var all_boxes = $.parseJSON(localStorage.getItem('boxesData'));
-	var pkmdm = '#pkm-detail-modal';
 
 	function process_boxes_data(str, format) {
 		var boxes = {};
@@ -108,15 +128,14 @@
 		switch (format) {
 			case 'csv':
 				console.log('processing csv');
-				temp = str.split("\n").slice(1);
+				temp = str.trim().split("\n").slice(1);
 				// console.log(temp);
 				for (var i = 0; i < temp.length; i++) {
 					pkm = temp[i];
 					var properties = pkm.split(",");
-					// if (properties.length != 31) {
-					// 	return;
-					// };
+					// console.log(properties);
 					box_no = properties[0].replace('B', '')*1;
+					// console.log(box_no);
 					b_r = properties[1];
 					b_c = properties[2];
 					pos = b_r+'-'+b_c;
@@ -226,7 +245,7 @@
 		}
 		localStorage.setItem('boxesData', JSON.stringify(boxes));
 		all_boxes = boxes;
-		console.log(boxes);
+		// console.log(boxes);
 		return boxes;
 	}
 	function render_box(b_n) {
@@ -246,6 +265,12 @@
 			image = '<img src="'+base_url+'public/images/minisprites/'+species+'.png" alt="">';
 			$('#'+pos+' button').empty().append(image).addClass('has-pkm');
 		});
+		if (!$.isEmptyObject(search_result)) {
+			$.each(search_result[b_n], function(index, val) {
+				// console.log(val)
+				$('#'+val+' button').addClass('btn-primary');
+			});
+		}
 	}
 	function render_info(box, position) {
 		if ( all_boxes == undefined || all_boxes[box] == undefined || all_boxes[box][position] == undefined) {
@@ -290,12 +315,7 @@
 		pkm = all_boxes[box][position];
 		console.log(pkm);
 		switch(pkm.gender)  {
-			case "♀":
-				$('.gender', pkmdm).addClass('text-red');
-			break;
-			case "♂":
-				$('.gender', pkmdm).addClass('text-blue');
-			break;
+			
 			default:
 			break;
 		}
@@ -320,6 +340,12 @@
 					break;
 				case '(None)':
 					$("."+index, pkmdm).html('-');
+				case "♀":
+					$('.gender', pkmdm).html('<span class="label label-danger">'+pkm.gender+'</span>');
+				break;
+				case "♂":
+					$('.gender', pkmdm).html('<span class="label label-primary">'+pkm.gender+'</span>');
+				break;
 				default:
 					$("."+index, pkmdm).html(val);
 					break;
@@ -329,12 +355,19 @@
 			$('.egg', pkmdm).html('<span class="label label-success">egg</span>');
 		};
 		if (pkm.is_shiny) {
-			$('.shiny', pkmdm).html('<span class="label label-danger">shiny</span>');
+			$('.shiny', pkmdm).html('<span class="label label-danger">★ shiny</span>');
 		};
 	}
 	function check_localStorage() {
 		if (localStorage.getItem('boxesData') != null) {
 			return true;
+		} else {
+			return false;
+		}
+	}
+	function check_last_box() {
+		if (localStorage.getItem('last_box') != null) {
+			return localStorage.getItem('last_box');
 		} else {
 			return false;
 		}
@@ -355,14 +388,42 @@
 				break;
 		}
 		render_box(b_n);
+		localStorage.setItem('last_box', b_n);
 		boxname = 'Box '+b_n;
 		$('.poke-box').attr('data-box-num', b_n);
 		$('.box-title').text(boxname);
 		$('.box-num').text(b_n);
 	}
 	function search(keyword) {
+		var result = {};
 		$.each(all_boxes, function(index, val) {
-			
+			// console.log("box:"+index)
+			$.each(val, function(key, value) {
+				// console.log(value);
+				// console.log("slot:"+key);
+				if (value['species'].toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
+					if (result[index] == undefined) {
+						result[index] = [];
+					};
+					result[index].push(key);
+				};
+			});
 		});
+		return result;
+	}
+	var render_result = function(res) {
+		search_result = res;
+		result_html = "";
+		if (!$.isEmptyObject(res)) {
+			$.each(res, function(index, val) {
+				result_html+='<button class="btn btn-primary btn-sm btn-block switch-box" data-to-box="'+index+'" type="button">Box '+index+'</button>';
+			});
+		} else {
+			result_html = "Pokemon not found.";
+		}
+		
+		// console.log(result);
+		$('#result').empty().html(result_html);
+		// render_box($('poke-box').attr('data-box-num'));
 	}
 }(window.jQuery, window, document));

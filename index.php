@@ -98,7 +98,7 @@
                                       <tr>
                                       <?php for ($c=1; $c < 7; $c++): ?>
                                           <td id="<?php echo $r."-".$c ?>" style="text-align: center;">
-                                            <button id="" class="btn btn-default show-info" data-container="body" data-toggle="popover" data-content="---------" data-original-title="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
+                                            <button id="" class="btn show-info" data-container="body" data-toggle="popover" data-content="---------" data-original-title="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
                                           </td>
                                       <?php endfor ?>
                                       </tr>
@@ -111,6 +111,10 @@
                     </div>
                     <div class="col-md-3">
                       <input type="text" class="form-control" id="search-input" placeholder="Search by species">
+                      <br>
+                      <div class="panel panel-primary">
+                        <div class="panel-body" id="result"></div>
+                      </div>
                     </div>
                   </div>
                 </div> <!-- Panel -->
@@ -189,7 +193,7 @@
               <table class="table condensed-table">
                 <tr><td colspan="" class="detail shiny">-</td><td colspan="3" class="detail egg">-</td></tr>
                 <tr><td>Nickname</td><th class="detail nname">-</th><td>ESV</td><th><span class="text-red detail esv"></span></th></tr>
-                <tr><td>Species</td><th colspan="" class="detail species">-</th><th colspan=""><b class="detail gender"></b></th><th class="pkball"></th></tr>
+                <tr><td>Species</td><th colspan="" class="detail species">-</th><th colspan="" class="detail gender"></th><th class="detail pkball"></th></tr>
                 <tr><td>Ability</td><th colspan="3" class="detail ability">-</th></tr>
                 <tr><td>Nature</td><th colspan="3" class="detail nature">-</th></tr>
                 <tr><td>OT</td><th colspan="3" class="detail ot">-</th></tr>
