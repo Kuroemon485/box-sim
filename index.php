@@ -110,8 +110,11 @@
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <input type="text" class="form-control" id="search-input" placeholder="Search by species">
-                      <br>
+                      <input type="search" class="form-control" id="search-input" placeholder="Search...">
+                      <div class="inline-group">
+                        <label class="radio-inline"><input type="radio" name="search-type" value="species" checked><b>by species</b></label>
+                        <label class="radio-inline"><input type="radio" name="search-type" value="esv" ><b>by ESV</b></label>
+                      </div>
                       <div class="panel panel-primary">
                         <div class="panel-body" id="result"></div>
                       </div>
@@ -292,29 +295,29 @@ B31,3,1,Ditto,-,Modest,Limber,31,31,31,31,31,31,Dark,,2268,Babymaker,ズキ,Heav
 <!--Scripts--> 
 <!--JQuery--> 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-<script type="text/javascript" src="public/js/vendors/jquery/jquery.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/jquery/jquery-ui.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/jquery/jquery.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/jquery/jquery-ui.min.js"></script> 
 
 <!--Fullscreen--> 
-<script type="text/javascript" src="public/js/vendors/fullscreen/screenfull.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/fullscreen/screenfull.min.js"></script> 
 
 <!--Forms--> 
-<script type="text/javascript" src="public/js/vendors/forms/jquery.form.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/forms/jquery.validate.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/forms/jquery.maskedinput.min.js"></script> 
-<script type="text/javascript" src="public/js/vendors/jquery-steps/jquery.steps.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/forms/jquery.form.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/forms/jquery.validate.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/forms/jquery.maskedinput.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/jquery-steps/jquery.steps.min.js"></script> 
 
 
 <!--Bootstrap--> 
-<script type="text/javascript" src="public/js/vendors/bootstrap/bootstrap.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/bootstrap/bootstrap.min.js"></script> 
 
 <!--Bootstrap Progress Bar--> 
-<script type="text/javascript" src="public/js/vendors/bootstrap-progress-bar/bootstrap-progressbar.min.js"></script> 
+<script type="text/javascript" src="./public/js/vendors/bootstrap-progress-bar/bootstrap-progressbar.min.js"></script> 
 
-<script src="public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="./public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Main scripts -->
-<script src="public/js/xytools.js"></script>
+<script src="./public/js/xytools.js"></script>
 
 <!--/Scripts-->
 
