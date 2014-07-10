@@ -15,7 +15,7 @@
             size: "5px",
             alwaysVisible: true,
             wheelStep:1,
-            size: "3px"
+            size: "3px",
         });
         $('#result').slimscroll({
             height: "357px",
@@ -96,9 +96,12 @@
 			switchbox(id);
 		});
 		$('#search-input').on('keyup', function() {
-			if ($(this).val().length >= 3) {
-				render_result(search($(this).val()));
-			};
+			if ($(this).val().length >= 1) {
+				attrts = $('[name="search-type"]:checked').val();
+				render_result(search(attrts, $(this).val()));
+			} else {
+				clear_result();
+			}
 		});
 	});
 	var base_url = '';
@@ -248,7 +251,29 @@
 		// console.log(boxes);
 		return boxes;
 	}
+	function switchbox(b_n) {
+		switch (b_n) {
+			case "1":
+				$('.to-prev-box').attr('data-to-box', '31');
+				$('.to-next-box').attr('data-to-box', '2');
+				break;
+			case "31":
+				$('.to-prev-box').attr('data-to-box', '30');
+				$('.to-next-box').attr('data-to-box', '1');
+				break;
+			default:
+				$('.to-prev-box').attr('data-to-box', (b_n*1-1));
+				$('.to-next-box').attr('data-to-box', (b_n*1+1));
+				break;
+		}
+		render_box(b_n);
+		localStorage.setItem('last_box', b_n);
+	}
 	function render_box(b_n) {
+		boxname = 'Box '+b_n;
+		$('.poke-box').attr('data-box-num', b_n);
+		$('.box-title').text(boxname);
+		$('.box-num').text(b_n);
 		reset_boxes();
 		if ( all_boxes == undefined || all_boxes[b_n] == undefined) {
 			reset_boxes();
@@ -265,7 +290,7 @@
 			image = '<img src="'+base_url+'public/images/minisprites/'+species+'.png" alt="">';
 			$('#'+pos+' button').empty().append(image).addClass('has-pkm');
 		});
-		if (!$.isEmptyObject(search_result)) {
+		if (!$.isEmptyObject(search_result) && (b_n in search_result)) {
 			$.each(search_result[b_n], function(index, val) {
 				// console.log(val)
 				$('#'+val+' button').addClass('btn-primary');
@@ -297,18 +322,18 @@
 				iv_spread[ind] = '<b class="text-red">31</b>';
 			}
 		});
+		title = species+" "+gender;
 		iv = iv_spread.join('-');
-		data = "<table class='table-condensed'><tr><th>Nature</th><td>"+nature+"</td>";
-		if (pkm.is_shiny) {
-			data+= '<td><span class="label label-danger">Shiny</span></td>';
-		};
-		data+="</tr><tr><th>Ability</th><td colspan='2'>"+ability+"</td></tr><tr><th>IVs Spread</th><td colspan='2'>"+iv+"</td></tr>";
+		data = "<table class='table-condensed'><tr><th>Nature</th><td>"+nature+"</td></tr><tr><th>Ability</th><td colspan='2'>"+ability+"</td></tr><tr><th>IVs Spread</th><td colspan='2'>"+iv+"</td></tr>";
 		if (pkm.is_egg) {
 			data+="<tr><th>ESV</th><td colspan='2'>"+esv+"</td></tr>";
-			species = '<b class="text-red">[EGG]</b> '+species;
+			title = '<span class="label label-success">egg</span> '+species+' '+gender;
+		};
+		if (pkm.is_shiny) {
+			title = '<span class="label label-danger">Shiny</span> '+species+' '+gender;
 		};
 		data += "</table>";
-		$('#'+position+' button').attr('data-content', data).attr('data-original-title', species+" "+gender);
+		$('#'+position+' button').attr('data-content', data).attr('data-original-title', title);
 	}
 	function render_pkm_detail_modal(box, position) {
 		reset_detail_modal();
@@ -341,10 +366,10 @@
 				case '(None)':
 					$("."+index, pkmdm).html('-');
 				case "♀":
-					$('.gender', pkmdm).html('<span class="label label-danger">'+pkm.gender+'</span>');
+					$('.gender', pkmdm).html('<b class="text-red">'+pkm.gender+'</b>');
 				break;
 				case "♂":
-					$('.gender', pkmdm).html('<span class="label label-primary">'+pkm.gender+'</span>');
+					$('.gender', pkmdm).html('<b class="text-blue">'+pkm.gender+'</b>');
 				break;
 				default:
 					$("."+index, pkmdm).html(val);
@@ -372,36 +397,14 @@
 			return false;
 		}
 	}
-	function switchbox(b_n) {
-		switch (b_n) {
-			case "1":
-				$('.to-prev-box').attr('data-to-box', '31');
-				$('.to-next-box').attr('data-to-box', '2');
-				break;
-			case "31":
-				$('.to-prev-box').attr('data-to-box', '30');
-				$('.to-next-box').attr('data-to-box', '1');
-				break;
-			default:
-				$('.to-prev-box').attr('data-to-box', (b_n*1-1));
-				$('.to-next-box').attr('data-to-box', (b_n*1+1));
-				break;
-		}
-		render_box(b_n);
-		localStorage.setItem('last_box', b_n);
-		boxname = 'Box '+b_n;
-		$('.poke-box').attr('data-box-num', b_n);
-		$('.box-title').text(boxname);
-		$('.box-num').text(b_n);
-	}
-	function search(keyword) {
+	function search(ats, keyword) {
 		var result = {};
 		$.each(all_boxes, function(index, val) {
 			// console.log("box:"+index)
 			$.each(val, function(key, value) {
 				// console.log(value);
 				// console.log("slot:"+key);
-				if (value['species'].toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
+				if (value[ats].toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
 					if (result[index] == undefined) {
 						result[index] = [];
 					};
@@ -421,9 +424,13 @@
 		} else {
 			result_html = "Pokemon not found.";
 		}
-		
 		// console.log(result);
 		$('#result').empty().html(result_html);
+		render_box(check_last_box());
 		// render_box($('poke-box').attr('data-box-num'));
+	}
+	function clear_result() {
+		$('.show-info').removeClass('btn-primary')
+		$('#result').empty();
 	}
 }(window.jQuery, window, document));
