@@ -380,7 +380,7 @@
 			$('.egg', pkmdm).html('<span class="label label-success">egg</span>');
 		};
 		if (pkm.is_shiny) {
-			$('.shiny', pkmdm).html('<span class="label label-danger">★ shiny</span>');
+			$('.shiny', pkmdm).html('<span class="label label-danger">shiny</span>');
 		};
 	}
 	function check_localStorage() {

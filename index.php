@@ -197,7 +197,7 @@
                 <tr><td colspan="" class="detail shiny">-</td><td colspan="3" class="detail egg">-</td></tr>
                 <tr><td>Nickname</td><th class="detail nname">-</th><td>ESV</td><th><span class="text-red detail esv"></span></th></tr>
                 <tr><td>Species</td><th colspan="" class="detail species">-</th><th colspan="" class="detail gender"></th><th class="detail pkball"></th></tr>
-                <tr><td>Ability</td><th colspan="3" class="detail ability">-</th></tr>
+                <tr><td>Ability</td><th colspan="" class="detail ability">-</th><td>HP type</td><th class="hp_type"></th></tr>
                 <tr><td>Nature</td><th colspan="3" class="detail nature">-</th></tr>
                 <tr><td>OT</td><th colspan="3" class="detail ot">-</th></tr>
                 <tr><td>TID</td><th class="detail tid">-</th><td>SID</td><th class="detail sid">-</th></tr>
