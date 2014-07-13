@@ -73,7 +73,8 @@
                             <div class="btn-group">
                               <button class="btn btn-success switch-box to-prev-box" data-to-box="31"><i class="fa fa-angle-left"></i></button>
                               <div class="btn-group">
-                                  <button type="button" class="btn btn-success box-num dropdown-toggle" data-toggle="dropdown">1</button>
+                                  <button type="button" class="btn btn-success box-num" data-toggle="">1</button>
+                                  <!-- <button type="button" class="btn btn-success box-num dropdown-toggle" data-toggle="dropdown">1</button> -->
                                   <ul class="dropdown-menu box-list" style="max-height: 300px; overflow-y: scroll;">
                                       <?php for ($bl=1; $bl <= 31; $bl++): ?>
                                           <li><a href="#B<?php echo $bl ?>">Box <?php echo $bl ?></a></li>
@@ -98,7 +99,7 @@
                                       <tr>
                                       <?php for ($c=1; $c < 7; $c++): ?>
                                           <td id="<?php echo $r."-".$c ?>" style="text-align: center;">
-                                            <button id="" class="btn show-info" data-container="body" data-toggle="popover" data-content="---------" data-original-title="Empty slot"><img src="public/images/favicon.ico" alt=""></button>
+                                            <button id="" class="btn show-info" data-container="body" data-toggle="popover" data-content="---------" data-original-title="Empty slot"><img src="public/images/empty-slot.png" alt=""></button>
                                           </td>
                                       <?php endfor ?>
                                       </tr>
@@ -151,6 +152,7 @@
         <div class="inline-group">
           <label class="radio-inline"><input type="radio" name="format" id="csv" checked><b>CSV</b></label>
           <label class="radio-inline"><input type="radio" name="format" id="reddit" ><b>Reddit</b></label>
+          <label class="radio-inline"><input type="radio" name="format" id="default" ><b>Default</b></label>
         </div>
         <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
       </div>
@@ -179,6 +181,27 @@
       </div>
     </div>
     <!-- /.modal-content --> 
+  </div>
+</div>
+<div class="modal fade" id="boxes-list-modal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 class="modal-title">All boxes</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-condensed">
+          <?php for ($i=0; $i < 4; $i++) : ?>
+            <tr>
+              <?php for ($j=1; $j < 9; $j++) : ?>
+                <td><button class="btn button-sm switch-box" data-to-box="<?php echo $i*8+$j ?>"><img src="public/images/empty-box.ico" alt=""></button></td>
+              <?php endfor ?>
+            </tr>
+          <?php endfor ?>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <!-- /.modal --> 
@@ -249,19 +272,24 @@
             - Click <button class="btn btn-success btn-sm"><i class="entypo-publish"></i></button> and a modal will appear, paste data into textarea. <br>
             - Your <b class="text-red">Reddit</b> data should be something like this:
             <pre>
-| Box | Slot | Name | Nature | Ability | Spread | SV
-|:--|:--|:--|:--|:--|:--|:--
-| B2 | 1,1 | Tyrunt (M) | Adamant | Strong Jaw | 31.31.31.04.31.31 | 1164 |
-| B2 | 1,2 | Tyrunt (F) | Adamant | Strong Jaw | 31.31.31.31.29.31 | 0246 |
-| B2 | 1,3 | Tyrunt (M) | Adamant | Strong Jaw | 31.29.31.31.31.31 | 2815 |
+B01+
 
+Box | Slot | Species (Gender) | Nature | Ability | HP.ATK.DEF.SPA.SPD.SPE | HiddenPower | ESV |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+B01 | 1,1 | Heracross (♀) | Adamant | Moxie | 31.31.31.31.31.4 | Ice |  |
+B01 | 1,2 | Heracross (♂) | Adamant | Moxie | 31.31.31.31.23.31 | Dark |  |
+B01 | 1,3 | Heracross (♂) | Adamant | Moxie | 31.31.8.31.31.31 | Dragon |  |
+B01 | 1,4 | Heracross (♀) | Adamant | Moxie | 31.31.21.31.31.31 | Dark |  |
 .
 .
 .
-| B27 | 5,2 | Heracross (M) | Adamant | Moxie | 31.31.31.22.31.04 | 1891 |
-| B27 | 5,3 | Heracross (M) | Adamant | Moxie | 31.31.01.22.31.31 | 3172 |
-| B27 | 5,4 | Heracross (M) | Adamant | Moxie | 31.31.31.22.06.31 | 0503 |
-| B27 | 5,5 | Heracross (F) | Adamant | Swarm | 31.31.04.22.31.31 | 3160 |
+B31 | 1,1 | Heracross (♂) | Adamant | Swarm | 31.31.31.31.31.31 | Dark | 2864 |
+B31 | 1,2 | Charmander (♂) | Jolly | Solar Power | 31.31.31.22.31.31 | Electric | 0123 |
+B31 | 1,3 | Heracross (♀) | Adamant | Moxie | 31.31.31.26.31.31 | Electric | 1003 |
+B31 | 1,4 | Heracross (♂) | Adamant | Moxie | 31.31.31.0.31.31 | Electric | 0823 |
+B31 | 1,5 | Heracross (♂) | Adamant | Moxie | 31.31.31.31.31.31 | Dark | 2191 |
+B31 | 1,6 | Heracross (♀) | Adamant | Moxie | 31.31.31.31.30.31 | Steel | 2608 |
+
     </pre>
     <b class="text-red">CSV format</b> should be like this:
     <pre>

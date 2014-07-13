@@ -9,6 +9,7 @@
 		});
 		$('#cld').on('click', function () {
 			cleardata();
+			$('#approve-modal').modal('hide');
 		});
 		$('#faqs-modal .modal-body').slimscroll({
             height: "400px",
@@ -24,14 +25,18 @@
             wheelStep:1,
             size: "3px"
         });
+        render_boxes_list();
         if (check_localStorage()) {
-        		console.log(check_last_box())
+        	// console.log(check_last_box())
         	if (check_last_box()) {
         		switchbox(check_last_box());
         	} else {
         		switchbox(1);
         	}
         };
+        $('.box-num').on('click', function () {
+        	$('#boxes-list-modal').modal('show');
+        });
 		$('#cim').on('click', function () {
 			$('#import-modal').modal('show');
 		});
@@ -76,10 +81,10 @@
 		$('#impd').on('click', function() {
 			rawdata = $('#import-modal textarea').val();
 			format = $('[name="format"]:checked').attr('id');
-			console.log(format);
 			if (rawdata != '') {
 				process_boxes_data(rawdata, format);
 				render_box($('.poke-box').attr('data-box-num'));
+				render_boxes_list();
 				$('#import-modal').modal('hide');
 			} else {
 				return;
@@ -94,6 +99,7 @@
 		$(document).on('click','.switch-box', function () {
 			id = $(this).attr('data-to-box');
 			switchbox(id);
+			$('#boxes-list-modal').modal('hide');
 		});
 		$('#search-input').on('keyup', function() {
 			if ($(this).val().length >= 1) {
@@ -112,10 +118,10 @@
 	var pkmdm = '#pkm-detail-modal';
 
 	var reset_boxes = function() {
-		$('.show-info img').attr('src', base_url+'public/images/favicon.ico');
+		$('.show-info img').attr('src', base_url+'public/images/empty-slot.png');
 		$('.show-info').removeClass('btn-danger btn-success btn-warning btn-primary');
 		$('.show-info').attr('data-original-title', 'Empty slot').attr('data-content', '-').removeClass('has-pkm');
-		$('#approve-modal').modal('hide');
+		$('#boxes-list-modal .switch-box img').attr('src', base_url+'public/images/empty-box.png');
 	}
 	var reset_detail_modal = function() {
 		$('.detail', pkmdm).html('-');
@@ -126,11 +132,11 @@
 	}
 
 	function process_boxes_data(str, format) {
+		console.log("Processing "+format);
 		var boxes = {};
 		reset_boxes();
 		switch (format) {
 			case 'csv':
-				console.log('processing csv');
 				temp = str.trim().split("\n").slice(1);
 				// console.log(temp);
 				for (var i = 0; i < temp.length; i++) {
@@ -205,11 +211,13 @@
 			break;
 
 			case 'reddit':
-				temp = str.replace("| Box | Slot | Name | Nature | Ability | Spread | SV\n|:--|:--|:--|:--|:--|:--|:--\n", "").replace(/^\s+|\s+$/g, '').split("\n");
-				for (var i = 0; i < temp.length; i++) {
-					pkm = temp[i];
-					var properties = pkm.split(" | ");
-					box_no = properties[0].replace('| B', '')*1;
+				temp = str.trim().split("\n").slice(4);
+				// console.log(temp);
+				$.each(temp, function(index, val) {
+					pkm = val;
+					var properties = $.map(pkm.split("|"), $.trim).slice(0, 8);
+					// console.log(properties);
+					box_no = properties[0].replace('B', '')*1;
 					pos = properties[1].split(",").join('-');
 					if (boxes[box_no] == undefined) {
 						boxes[box_no] = {};
@@ -217,31 +225,70 @@
 					if (boxes[box_no][pos] == undefined) {
 						boxes[box_no][pos] = {};
 					};
-					properties[properties.length-1] = properties[properties.length-1].replace(' |', '');
-					boxes[box_no][pos]['species'] = properties[2].replace(" (M)", "").replace(" (F)", "");
-					boxes[box_no][pos]['gender'] = "-";
-					if (properties[2].indexOf(" (M)") != -1) {
-						boxes[box_no][pos]['gender'] = "♂";
-					};
-					if (properties[2].indexOf(" (F)") != -1) {
-						boxes[box_no][pos]['gender'] = "♀";
-					}; 
+					s_g = properties[2].split(" ");
+					boxes[box_no][pos]['species'] = s_g[0];
+					boxes[box_no][pos]['gender'] = s_g[1].charAt(1); 
 					boxes[box_no][pos]['nature'] = properties[3];
 					boxes[box_no][pos]['ability'] = properties[4];
-					spread = properties[5].split(".");
+					spread = properties[5].replace(/\*\*/g, "").split(".");
 					boxes[box_no][pos]['hp_iv'] = spread[0];
 					boxes[box_no][pos]['atk_iv'] = spread[1];
 					boxes[box_no][pos]['def_iv'] = spread[2];
 					boxes[box_no][pos]['satk_iv'] = spread[3];
 					boxes[box_no][pos]['sdef_iv'] = spread[4];
 					boxes[box_no][pos]['spd_iv'] = spread[5];
-					boxes[box_no][pos]['esv'] = "";
-					if (properties[6] != undefined) {
-						boxes[box_no][pos]['esv'] = properties[6];
-					};
-				};
+					boxes[box_no][pos]['hp_type'] = properties[6];
+					boxes[box_no][pos]['esv'] = properties[7];
+					switch (properties[7]) {
+						case "":
+							boxes[box_no][pos]['is_egg'] = false;
+						break;
+						default:
+							boxes[box_no][pos]['is_egg'] = true;
+						break;
+					}
+				});
 			break;
 
+			case "default":
+				temp = str.trim().split("\n");
+				// console.log(temp);
+				$.each(temp, function(index, val) {
+					pkm = val;
+					var properties = $.map(pkm.split(" - "), $.trim);
+					// console.log(properties);
+					box_no = properties[0].replace('B', '')*1;
+					pos = properties[1].split(",").join('-');
+					if (boxes[box_no] == undefined) {
+						boxes[box_no] = {};
+					};
+					if (boxes[box_no][pos] == undefined) {
+						boxes[box_no][pos] = {};
+					};
+					s_g = properties[2].split(" ");
+					boxes[box_no][pos]['species'] = s_g[0];
+					boxes[box_no][pos]['gender'] = s_g[1].charAt(1); 
+					boxes[box_no][pos]['nature'] = properties[3];
+					boxes[box_no][pos]['ability'] = properties[4];
+					spread = properties[5].replace(/\*\*/g, "").split(".");
+					boxes[box_no][pos]['hp_iv'] = spread[0];
+					boxes[box_no][pos]['atk_iv'] = spread[1];
+					boxes[box_no][pos]['def_iv'] = spread[2];
+					boxes[box_no][pos]['satk_iv'] = spread[3];
+					boxes[box_no][pos]['sdef_iv'] = spread[4];
+					boxes[box_no][pos]['spd_iv'] = spread[5];
+					boxes[box_no][pos]['hp_type'] = properties[6];
+					boxes[box_no][pos]['esv'] = properties[7];
+					switch (properties[7]) {
+						case "":
+							boxes[box_no][pos]['is_egg'] = false;
+						break;
+						default:
+							boxes[box_no][pos]['is_egg'] = true;
+						break;
+					}
+				});
+			break;
 			default:
 
 			break;
@@ -267,7 +314,24 @@
 				break;
 		}
 		render_box(b_n);
+		render_boxes_list();
 		localStorage.setItem('last_box', b_n);
+	}
+	function render_boxes_list() {
+		if ( all_boxes == undefined) {
+			console.log('undefined');
+			return;
+		};
+		console.log('defined')
+		$.each(all_boxes, function(index, val) {
+			console.log(index)
+			$('#boxes-list-modal [data-to-box="'+index+'"]').empty().append('<img src="'+base_url+'public/images/filled-box.png"/>');
+		});
+		if (!$.isEmptyObject(search_result)) {
+			$.each(search_result, function(index, val) {
+				$('#boxes-list-modal [data-to-box="'+index+'"]').empty().append('<img src="'+base_url+'public/images/result-box.png"/>');
+			});
+		};
 	}
 	function render_box(b_n) {
 		boxname = 'Box '+b_n;
@@ -290,12 +354,15 @@
 			image = '<img src="'+base_url+'public/images/minisprites/'+species+'.png" alt="">';
 			$('#'+pos+' button').empty().append(image).addClass('has-pkm');
 		});
-		if (!$.isEmptyObject(search_result) && (b_n in search_result)) {
-			$.each(search_result[b_n], function(index, val) {
-				// console.log(val)
-				$('#'+val+' button').addClass('btn-primary');
-			});
+		if (!$.isEmptyObject(search_result) ) {
+			if (b_n in search_result) {
+				$.each(search_result[b_n], function(index, val) {
+					// console.log(val)
+					$('#'+val+' button').addClass('btn-primary');
+				});
+			}
 		}
+		render_boxes_list();
 	}
 	function render_info(box, position) {
 		if ( all_boxes == undefined || all_boxes[box] == undefined || all_boxes[box][position] == undefined) {
@@ -314,6 +381,7 @@
 		nature = pkm.nature;
 		ability = pkm.ability;
 		esv = pkm.esv;
+		hp = pkm.hp_type;
 		iv_spread = []
 		$.each(stats, function(ind, el) {
 			if (pkm[el+'_iv'] != 31) {
@@ -324,9 +392,9 @@
 		});
 		title = species+" "+gender;
 		iv = iv_spread.join('-');
-		data = "<table class='table-condensed'><tr><th>Nature</th><td>"+nature+"</td></tr><tr><th>Ability</th><td colspan='2'>"+ability+"</td></tr><tr><th>IVs Spread</th><td colspan='2'>"+iv+"</td></tr>";
+		data = "<table class='table-condensed'><tr><td>Nature</td><th>"+nature+"</th><td>HP</td><th>"+hp+"</th></tr><tr><td>Ability</td><th colspan='2'>"+ability+"</th></tr><tr><td>IVs Spread</td><th colspan='2'>"+iv+"</th></tr>";
 		if (pkm.is_egg) {
-			data+="<tr><th>ESV</th><td colspan='2'>"+esv+"</td></tr>";
+			data+="<tr><td>ESV</td><th colspan='2'>"+esv+"</th></tr>";
 			title = '<span class="label label-success">egg</span> '+species+' '+gender;
 		};
 		if (pkm.is_shiny) {
@@ -338,7 +406,7 @@
 	function render_pkm_detail_modal(box, position) {
 		reset_detail_modal();
 		pkm = all_boxes[box][position];
-		console.log(pkm);
+		// console.log(pkm);
 		switch(pkm.gender)  {
 			
 			default:
@@ -430,7 +498,8 @@
 		// render_box($('poke-box').attr('data-box-num'));
 	}
 	function clear_result() {
-		$('.show-info').removeClass('btn-primary')
+		$('.show-info').removeClass('btn-primary');
+		$('#boxes-list-modal [src*="result-box.png"]').prop('src', base_url+"public/images/filled-box.png");
 		$('#result').empty();
 	}
 }(window.jQuery, window, document));
